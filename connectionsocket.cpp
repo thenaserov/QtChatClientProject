@@ -3,23 +3,12 @@
 ConnectionSocket::ConnectionSocket(QObject *parent)
     : QObject{parent}
 {
-    socket = new QTcpSocket(this);
-    connect(socket, SIGNAL(connected()), this, SLOT(connected()));
-    connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
-    connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
-    connect(socket, SIGNAL(bytesWritten(qint64)), this, SLOT(bytesWritten(qint64)));
-    qDebug() << "Connecting,..";
-    socket->connectToHost(QHostAddress::LocalHost, 85855);
-    if(!socket->waitForDisconnected(1000))
-    {
-        qDebug() << "Error: " << socket->errorString();
-    }
 }
 
 void ConnectionSocket::connect()
 {
     socket = new QTcpSocket(this);
-    socket->connectToHost(QHostAddress::LocalHost, 85855);
+    socket->connectToHost(QHostAddress::LocalHost, 40400);
 
     if(socket->waitForConnected(3000))
     {
@@ -30,17 +19,18 @@ void ConnectionSocket::connect()
         socket->waitForBytesWritten(1000);
         socket->waitForReadyRead(3000);
         qDebug() << "Reading: " << socket->bytesAvailable();
-
         qDebug() << socket->readAll();
-
         socket->close();
     }
     else
     {
         qDebug() << "Not connected!";
     }
+
     // sent
+
     // got
+
     // closed
 }
 

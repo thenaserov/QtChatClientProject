@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     socket = new ConnectionSocket();
+    socket->connect();
     ui->leTypeMessage->setFocus();
 }
 
@@ -17,7 +18,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::sendMessage(QString textToSend)
 {
-
 }
 
 void MainWindow::on_btnSend_clicked()
