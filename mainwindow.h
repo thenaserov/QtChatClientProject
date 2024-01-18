@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "connectionsocket.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -16,10 +17,14 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void sendMessage(QString textToSend);
 
 private slots:
 
+    void on_btnSend_clicked();
+
 private:
     Ui::MainWindow *ui;
+    ConnectionSocket *socket;
 };
 #endif // MAINWINDOW_H

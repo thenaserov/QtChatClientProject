@@ -6,9 +6,23 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    socket = new ConnectionSocket();
+    ui->leTypeMessage->setFocus();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::sendMessage(QString textToSend)
+{
+
+}
+
+void MainWindow::on_btnSend_clicked()
+{
+    QString textToSend = ui->leTypeMessage->text();
+    sendMessage(textToSend);
+}
+
