@@ -14,6 +14,7 @@ public:
 
 private:
     QTcpSocket *socket;
+    void test();
 
 public slots:
     void connected();

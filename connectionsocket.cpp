@@ -13,7 +13,6 @@ void ConnectionSocket::connect()
     if(socket->waitForConnected(3000))
     {
         qDebug() << "Connected!";
-
         // send
         socket->write("hello server\r\n\r\n\r\n\r\n");
         socket->waitForBytesWritten(1000);
@@ -32,6 +31,24 @@ void ConnectionSocket::connect()
     // got
 
     // closed
+}
+
+void ConnectionSocket::test()
+{
+    socket = new QTcpSocket(this);
+    connect(socket, SIGNAL(connected()), this, SLOT(connected()));
+    connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
+    connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
+    connect(socket, SIGNAL(bytesWritten(qint64)), this, SLOT(bytesWritten(qint64)));
+
+    qDebug() << "Connecting,..";
+
+    socket->connectToHost("127.0.0.1", 40400);
+
+    if(!socket->waitForDisconnected(1000))
+    {
+        qDebug() << "Error: " << socket->errorString();
+    }
 }
 
 void ConnectionSocket::connected()
